@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" 
+    integrity="sha512-BnbUDfEUfV0Slx6TunuB042k9tuKe3xrD6q4mg5Ed72LTgzDIcLPxg6yI2gcMFRyomt+yJJxE+zJwNmxki6/RA==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    
+
+    <div class="container">
+        <div class="inner" data-aos="zoom-in"></div>>
+            <div class="box">
+                <button id="WAme" class="number">
+                    <img src="Logo_whatsapp.png" alt="Whatsapp" title="TweetMe" id="Tweet"/>
+                </button>
+
+                <div class="text">
+                    <i class= "start-quote fas fa-quote-left"></i>
+                    <p id="quotes" class="quotes"></p>
+                    <p id="author" class="author"></p>
+                    
+                </div>
+
+                <div class="button-main">
+                    <button id="newQ" class="button">New Quotes
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button id="Tweetme"></button>
+    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+        const quotes = document.getElementById('quotes');
+        const author = document.getElementById('author');
+        const newQ = document.getElementById("newQ");
+        let realData = "";
+        let quotesData = "";
+
+        let WAnow = () =>{
+            let WAPost = `whatsapp://send?text=${quotesData.text} ${quotesData.author}`;
+            window.open(WAPost);
+        }
+        let Tweetnow = () =>{
+            let TweetPost = `https://twitter.com/intend?text=${quotesData.text} ${quotesData.author}`;
+            window.open(TweetPost);
+        }
+
+        const getNewQuotes = () =>{
+            let rnum = Math.floor(Math.random() * 20);
+            quotesData = realData[rnum];
+            quotes.innerText = `${quotesData.text}`;
+            const WAme = document.getElementById("WAme")
+            quotesData.author == null
+                ? (author.innerText = "Unknown")
+                : (author.innerText = `By ${quotesData.author}`);
+        }
+        const GetQuotes = async () =>{
+        const api = "https://type.fit/api/quotes";
+        try {
+            let data = await fetch(api);
+            realData = await data.json();
+            getNewQuotes();
+        } catch (error) {}
+        };  
+        WAme.addEventListener('click', WAnow); 
+        Tweetme.addEventListener('click', Tweetnow) 
+        newQ.addEventListener('click', getNewQuotes);
+        GetQuotes();
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "npm_module",
+  "version": "1.0.0",
+  "description": "Node tutorials",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hritik Tembhe",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "nodemon": "^2.0.7"
+  }
+}
